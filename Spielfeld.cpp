@@ -3,6 +3,8 @@
 //
 
 #include "Spielfeld.h"
+
+#include <climits>
 #include <iostream>
 #include <sstream>
 
@@ -55,9 +57,9 @@ int  Spielfeld::Bewertung() {
     for (int i = 1; i < 4; i++) {
         if (checkThree(feld[i][1], feld[i][2], feld[i][3])) {
             if (feld[i][1] != ZuBewertenderSpieler) {
-                return -1; // Verloren
+                return INT_MIN; // Verloren
             }
-            return 1; // Gewonnen
+            return INT_MAX; // Gewonnen
         }
     }
 
@@ -65,24 +67,24 @@ int  Spielfeld::Bewertung() {
     for (int j = 1; j < 4; j++) {
         if (checkThree(feld[1][j], feld[2][j], feld[3][j])) {
             if (feld[1][j] != ZuBewertenderSpieler) {
-                return -1; //verloren
+                return INT_MIN; //verloren
             }
-            return 1; //gewonnen
+            return INT_MAX; //gewonnen
         }
     }
 
     // Diagonalen
     if (checkThree(feld[1][1], feld[2][2], feld[3][3])) {
         if (feld[1][1] != ZuBewertenderSpieler) {
-            return -1; //verloren
+            return INT_MIN; //verloren
         }
-        return 1; //gewonnen
+        return INT_MAX; //gewonnen
     }
     if (checkThree(feld[1][3], feld[2][2], feld[3][1])) {
         if (feld[1][3] != ZuBewertenderSpieler) {
-            return -1; //verloren
+            return INT_MIN; //verloren
         }
-        return 1; //gewonnen
+        return INT_MAX; //gewonnen
     }
 
     return 0;
